@@ -9,8 +9,12 @@
 @foreach ($posts as $post)
     <p>
         {{ $post->title }}
-        [<a href="{{ route("posts.show", $post->id) }}">Ver Mais</a>]
+        [
+            <a href="{{ route("posts.show", $post->id) }}">Ver Mais</a> |
+            <a href="{{ route("posts.edit", $post->id) }}">Editar</a>
+        ]
     </p>
 @endforeach
-
-
+<hr>
+{{-- {{$posts->links() liberar dps com uso de css e npm}}
+ --}}

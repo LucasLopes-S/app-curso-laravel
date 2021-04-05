@@ -8,7 +8,7 @@ use App\Models\Post;
 class PostController extends Controller
 {
     public function index(){
-        $posts = Post::get();
+        $posts = Post::orderBy('id')->paginate();
 
         return view('admin.index', compact('posts'));
     }
@@ -43,4 +43,24 @@ class PostController extends Controller
 
         return redirect()->route('posts.index')->with('message', 'Excluido com Sucesso!');
     }
+
+    public function edit($id){
+        $post = Post::find($id);
+        if(!$post){
+            return redirect()->back();
+        }
+
+        return view('admin.edit', compact('post'));
+    }
+
+    public function update(StoreUpdatePostRequests $request, $id){
+
+        $post = Post::find($id);
+        if(!$post){
+            return redirect()->back();
+        }
+        $post->update($request->all());
+        return redirect()->route('posts.index')->with('message', 'Post Alterado com sucesso!');
+    }
+
 }
