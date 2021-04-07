@@ -1,15 +1,14 @@
+@extends('admin.layouts.app')
+
+@section('title','Atualizar Post')
+
+@section('content')
+
 <h1>Edição de Posts <strong>{{ $post->title }}</strong></h1>
-@if ($errors->any())
-    <ul>
-        @foreach ($errors->all() as $error)
-            <li>{{$error}}</li>
-        @endforeach
-    </ul>
-@endif
-<form action="{{ route('posts.update', $post->id) }}" method="post">
-    @csrf
+
+<form action="{{ route('posts.update', $post->id) }}" method="post" enctype="multipart/form-data">
     @method('put')
-    <input type="text" name="title" id="title" placeholder="Título" value="{{ $post->title }}">
-    <textarea name="content" id="content" id="content" cols="30" rows="10" placeholder="Conteúdo" >{{ $post->content }}</textarea>
-    <button type="submit">Editar</button>
+    @include('admin._partials.form')
 </form>
+
+@endsection
