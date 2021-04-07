@@ -15,6 +15,14 @@ Route::delete('/posts/{id}',[PostController::class, 'destroy'])-> name('posts.de
 Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show');
 Route::put('/posts/{id}', [PostController::class, 'update'])-> name('posts.update');
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+require __DIR__.'/auth.php';
+
